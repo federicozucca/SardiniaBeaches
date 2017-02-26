@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  tipology: MyString
+  lat: 9.99
+  lng: 9.99
+  img: MyString
+  parking: MyString
+  wiki: MyString
+
+two:
+  name: MyString
+  tipology: MyString
+  lat: 9.99
+  lng: 9.99
+  img: MyString
+  parking: MyString
+  wiki: MyString
