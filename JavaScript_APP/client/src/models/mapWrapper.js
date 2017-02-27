@@ -5,22 +5,21 @@ var MapWrapper = function(container, coords, zoom){
   });
 }
 
-
 MapWrapper.prototype ={
 
   putMarkers:function(beaches){
     for (var beach of beaches){
-      console.log(beach)
-      console.log("parseIntLAT:", parseFloat(beach.lat))
-      console.log("parseIntLNG:", parseFloat(beach.lng))
-      this.addMarker(beach)
+      // console.log(beach)
+      // console.log("parseIntLAT:", parseFloat(beach.lat))
+      // console.log("parseIntLNG:", parseFloat(beach.lng))
+      this.addBeachMarker(beach)
     }
   },
 
-  addMarker: function(beach){
+  addBeachMarker: function(beach){
     var infoWindow = new google.maps.InfoWindow({
 
-      content: "<div class='beach-title'><p>Beach Name: <b>"+ beach.name +"</b></p><br><img src="+ beach.img +" alt="+ beach.name +" style=\"width:304px;height:228px;\"><br><p>Beach Lat: "+ beach.lat +"</p><p>Beach Lng: "+ beach.lng +"</p></div>"
+      content: "<div class='beach-title'><p>Beach Name: <b>"+ beach.name +"</b></p><br><img src=images/"+ beach.img +" alt="+ beach.name +" style=\"width:300px;height:220px;\"><br><p>Parking Area: "+ beach.parking +"</p><p>Info: "+ beach.wiki +"</p></div>"
     });
 
     var iconUmbrella = {
@@ -42,7 +41,6 @@ MapWrapper.prototype ={
       this.googleMap.setCenter(marker.getPosition());
     }.bind(this));
     google.maps.event.addListener(infoWindow, 'closeclick', function() {
-      console.log("InfoWindow Closed")
       this.googleMap.setZoom(8);
       var center = {lat:40.111672, lng:9.015906}
       this.googleMap.setCenter(center);
@@ -52,8 +50,7 @@ MapWrapper.prototype ={
   centreMap: function (coords, zoom){
     this.googleMap.setCenter(coords);
     this.googleMap.setZoom(zoom);
-  },
-
+  }
 }
 
 module.exports = MapWrapper

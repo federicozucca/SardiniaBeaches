@@ -1,7 +1,7 @@
 class BeachesController < ApplicationController
 
   def beach_params 
-    return params.require(:beach).permit([:name, :territory, :tipology, :lat, :lng, :img, :parking, :wiki])
+    return params.require(:beach).permit([:name, :territory, :tipology, :lat, :lng, :img, :parking, :wiki, :airport, :port])
   end
 
   def index
@@ -11,31 +11,37 @@ class BeachesController < ApplicationController
 
   def show
     beach = Beach.find(params[:id])
-    render({json: beach})
+    render json: beach.as_json(
+      {include: 
+        {airport:
+          {only: :name}
+        }
+      }
+    )
   end
 
   def create
     beach = Beach.create(beach_params())
-   render({json: beach})
- end
-
- def update
-  beach = Beach.find(params[:id])
-  if beach.update_attributes(beach_params())
     render({json: beach})
-  else
-    render({json: :update_failed})
   end
-end
 
-def destroy
-  beach = Beach.find(params[:id])
-  if beach.destroy!
-    render({json: {status: :success}})
-  else 
-    render({json: {status: :delete_failed}})
+  def update
+    beach = Beach.find(params[:id])
+    if beach.update_attributes(beach_params())
+      render({json: beach})
+    else
+      render({json: :update_failed})
+    end
   end
-end
+
+  def destroy
+    beach = Beach.find(params[:id])
+    if beach.destroy!
+      render({json: {status: :success}})
+    else 
+      render({json: {status: :delete_failed}})
+    end
+  end
 
 
 

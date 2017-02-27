@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224110229) do
+ActiveRecord::Schema.define(version: 20170227105422) do
+
+  create_table "airports", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "lat"
+    t.decimal  "lng"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "beaches", force: :cascade do |t|
     t.string   "name"
@@ -20,9 +28,21 @@ ActiveRecord::Schema.define(version: 20170224110229) do
     t.string   "img"
     t.string   "parking"
     t.string   "wiki"
+    t.string   "territory"
+    t.integer  "airport_id"
+    t.integer  "port_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "territory"
+    t.index ["airport_id"], name: "index_beaches_on_airport_id"
+    t.index ["port_id"], name: "index_beaches_on_port_id"
+  end
+
+  create_table "ports", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "lat"
+    t.decimal  "lng"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

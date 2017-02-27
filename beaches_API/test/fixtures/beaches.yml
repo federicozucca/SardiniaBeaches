@@ -8,6 +8,9 @@ one:
   img: MyString
   parking: MyString
   wiki: MyString
+  territory: MyString
+  airport: one
+  port: one
 
 two:
   name: MyString
@@ -17,3 +20,6 @@ two:
   img: MyString
   parking: MyString
   wiki: MyString
+  territory: MyString
+  airport: two
+  port: two

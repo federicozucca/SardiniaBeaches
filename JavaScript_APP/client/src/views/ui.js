@@ -1,5 +1,6 @@
 var Beaches = require('../models/beaches');
 var MapWrapper = require('../models/mapWrapper');
+var Weather = require('../models/weather');
 var ajax = require('../models/ajax')
 ;
 

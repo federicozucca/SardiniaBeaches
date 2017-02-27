@@ -8,6 +8,9 @@ class CreateBeaches < ActiveRecord::Migration[5.0]
       t.string :img
       t.string :parking
       t.string :wiki
+      t.string :territory
+      t.references :airport, foreign_key: true
+      t.references :port, foreign_key: true
 
       t.timestamps
     end
