@@ -1,26 +1,146 @@
 body {
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.main-map, .action, .info {
+  flex: 1 100%;
+}
+
+
+@media all and (min-width: 600px) {
+  .aside { flex: 1 auto; }
+}
+
+@media all and (min-width: 800px) {
+  .main-map { order: 1; }
+  .action    { order: 2; }
+  .info { order: 3; }
+}
+
+#container {
   display: flex;
 }
 
-.flex-container {
-    display: -webkit-flex;
-    display: flex;
-    width: 400px;
-    height: 250px;
-    background-color: lightgrey;
-}
-
-.flex-item {
-    background-color: cornflowerblue;
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-}
 
 #main-map {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 600px;
-  width: 400px;
+  width: 40%;
+}
+
+#action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 600px;
+  width: 20%;
+}
+
+
+#info {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  height: 600px;
+  width: 40%;
+}
+
+#button {
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 15px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  background: #d51011;
+  padding: 10px 20px 10px 20px;
+  border: solid #ffe014 2px;
+  text-decoration: none;
+}
+
+#button:hover {
+  background: #ffe014;
+  background-image: -webkit-linear-gradient(top, #ffe014, #d51011);
+  background-image: -moz-linear-gradient(top, #ffe014, #d51011);
+  background-image: -ms-linear-gradient(top, #ffe014, #d51011);
+  background-image: -o-linear-gradient(top, #ffe014, #d51011);
+  background-image: linear-gradient(to bottom, #ffe014, #d51011);
+  text-decoration: none;
+}
+
+#button-details {
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 15px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  background: #d51011;
+  padding: 10px 20px 10px 20px;
+  border: solid #ffe014 2px;
+  text-decoration: none;
+}
+
+#button-details:hover {
+  background: #ffe014;
+  background-image: -webkit-linear-gradient(top, #ffe014, #d51011);
+  background-image: -moz-linear-gradient(top, #ffe014, #d51011);
+  background-image: -ms-linear-gradient(top, #ffe014, #d51011);
+  background-image: -o-linear-gradient(top, #ffe014, #d51011);
+  background-image: linear-gradient(to bottom, #ffe014, #d51011);
+  text-decoration: none;
+}
+
+#button-airport {
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 15px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  background: #d51011;
+  padding: 10px 20px 10px 20px;
+  border: solid #ffe014 2px;
+  text-decoration: none;
+}
+
+#button-airport:hover {
+  background: #ffe014;
+  background-image: -webkit-linear-gradient(top, #ffe014, #d51011);
+  background-image: -moz-linear-gradient(top, #ffe014, #d51011);
+  background-image: -ms-linear-gradient(top, #ffe014, #d51011);
+  background-image: -o-linear-gradient(top, #ffe014, #d51011);
+  background-image: linear-gradient(to bottom, #ffe014, #d51011);
+  text-decoration: none;
+}
+
+#button-port {
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 15px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  background: #d51011;
+  padding: 10px 20px 10px 20px;
+  border: solid #ffe014 2px;
+  text-decoration: none;
+}
+
+#button-port:hover {
+  background: #ffe014;
+  background-image: -webkit-linear-gradient(top, #ffe014, #d51011);
+  background-image: -moz-linear-gradient(top, #ffe014, #d51011);
+  background-image: -ms-linear-gradient(top, #ffe014, #d51011);
+  background-image: -o-linear-gradient(top, #ffe014, #d51011);
+  background-image: linear-gradient(to bottom, #ffe014, #d51011);
+  text-decoration: none;
 }

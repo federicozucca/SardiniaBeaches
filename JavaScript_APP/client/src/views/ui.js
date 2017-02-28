@@ -13,6 +13,8 @@ var UI = function(){
   airportButton.style.visibility = 'hidden';
   var portButton = document.querySelector("#button-port");
   portButton.style.visibility = 'hidden';
+  var button = document.querySelector('#button');
+  button.style.visibility = 'hidden';
 
   new Weather();
 }

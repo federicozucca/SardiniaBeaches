@@ -99,6 +99,8 @@ MapWrapper.prototype ={
   showDataEnd:function(beach){
   var showData=document.querySelector('#data');
   showData.innerHTML=""
+  var showWeather=document.querySelector('#beach-forecast');
+  showWeather.innerHTML=""
   },
 
   addBeachMarker: function(beach){
@@ -137,16 +139,25 @@ MapWrapper.prototype ={
       var portButton = document.querySelector("#button-port");
       portButton.style.visibility = 'visible';
       portButton.onclick = function(){this.addBoatMarker(beach)}.bind(this)
+      localStorage.setItem('territory', beach.territory);
+
+      var button = document.querySelector('#button');
+      button.style.visibility = 'visible';
+
     }.bind(this));
    
     google.maps.event.addListener(infoWindow, 'closeclick', function() {
       this.googleMap.setZoom(8);
       var center = {lat:40.111672, lng:9.015906}
       this.googleMap.setCenter(center);
+      var detailsButton = document.querySelector("#button-details")
+      detailsButton.style.visibility = 'hidden';
       var airportButton = document.querySelector("#button-airport");
       airportButton.style.visibility = 'hidden';
       var portButton = document.querySelector("#button-port");
       portButton.style.visibility = 'hidden';
+      var button = document.querySelector('#button');
+      button.style.visibility = 'hidden';
       this.showDataEnd(beach)
       this.clearMarkers(beach)
     }.bind(this))
