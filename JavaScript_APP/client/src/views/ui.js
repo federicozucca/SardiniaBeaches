@@ -7,6 +7,14 @@ var ajax = require('../models/ajax')
 var UI = function(){
   this.map = this.renderMap();
   this.beaches = new Beaches(this.map);
+  var detailsButton = document.querySelector("#button-details");
+  detailsButton.style.visibility = 'hidden';
+  var airportButton = document.querySelector("#button-airport");
+  airportButton.style.visibility = 'hidden';
+  var portButton = document.querySelector("#button-port");
+  portButton.style.visibility = 'hidden';
+
+  new Weather();
 }
 
 
@@ -17,6 +25,7 @@ UI.prototype = {
       var map = new MapWrapper(mapDiv, center, 8);
       return map;
     }
+
  };
 
 module.exports = UI;

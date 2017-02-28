@@ -1,4 +1,26 @@
+body {
+  display: flex;
+}
+
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 400px;
+    height: 250px;
+    background-color: lightgrey;
+}
+
+.flex-item {
+    background-color: cornflowerblue;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}
+
 #main-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 600px;
-  width: 600px;
+  width: 400px;
 }

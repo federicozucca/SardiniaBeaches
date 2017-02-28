@@ -1,6 +1,6 @@
 var Weather = function(){
   var button = document.querySelector('#button');
-  button.onclick = handleClick;
+  button.onclick = this.handleClick;
 }
 
 Weather.prototype ={

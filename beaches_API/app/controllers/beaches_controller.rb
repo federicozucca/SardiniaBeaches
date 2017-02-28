@@ -6,18 +6,22 @@ class BeachesController < ApplicationController
 
   def index
     beachs = Beach.all()
-    render({json: beachs})
+    render({json: beachs.as_json({include: 
+        {
+          airport: {
+            only: [:name, :lat, :lng]
+          },
+          port: {
+            only: [:name, :lat, :lng]
+          }
+        }
+      })
+    })
   end
 
   def show
     beach = Beach.find(params[:id])
-    render json: beach.as_json(
-      {include: 
-        {airport:
-          {only: :name}
-        }
-      }
-    )
+    render({json: beach})
   end
 
   def create
