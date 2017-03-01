@@ -12,9 +12,6 @@ MapWrapper.prototype ={
 
   putMarkers:function(beaches){
     for (var beach of beaches){
-      // console.log(beach)
-      // console.log("parseIntLAT:", parseFloat(beach.lat))
-      // console.log("parseIntLNG:", parseFloat(beach.lng))
       this.addBeachMarker(beach)
     }
   },
@@ -73,108 +70,108 @@ MapWrapper.prototype ={
     var liName = document.querySelector("#liName")
 
 
-      var showData =document.querySelector("#data");
-      var ul = document.createElement("ul"); 
-      if (liName === null){
-        var liName = document.createElement("li"); 
-        liName.id = "liName"
-        liName.innerText = "Beach Name: " + beach.name
-        ul.appendChild(liName);
-        var liTipology = document.createElement("li"); 
-        liTipology.innerText = "Beach Tipology: " + beach.tipology
-        var liParking = document.createElement("li");
-        liParking.innerText = "Parking Area: " + beach.parking 
-        var liWiki = document.createElement("li"); 
-        liWiki.innerText = "Info: " + beach.wiki
-        var liAirport = document.createElement("li");
-        liAirport.innerText = "Nearest Airport: " + beach.airport.name
-        var liPort = document.createElement("li");
-        liPort.innerText = "Nearest Port: " + beach.port.name
-        var img = document.createElement('img');
-        img.src = "images/"+beach.img;
-        img.id= "images"
-        showData.appendChild(ul);
-        ul.appendChild(liTipology);
-        ul.appendChild(liParking);
-        ul.appendChild(liWiki);
-        ul.appendChild(liAirport);
-        ul.appendChild(liPort);
-        ul.appendChild(img);}
+    var showData =document.querySelector("#data");
+    var ul = document.createElement("ul"); 
+    this.showDataEnd(beach)
+    this.clearMarkers(beach)
+    var liName = document.createElement("li"); 
+    liName.id = "liName"
+    liName.innerText = "Beach Name: " + beach.name
+    ul.appendChild(liName);
+    var liTipology = document.createElement("li"); 
+    liTipology.innerText = "Beach Tipology: " + beach.tipology
+    var liParking = document.createElement("li");
+    liParking.innerText = "Parking Area: " + beach.parking 
+    var liWiki = document.createElement("li"); 
+    liWiki.innerText = "Info: " + beach.wiki
+    var liAirport = document.createElement("li");
+    liAirport.innerText = "Nearest Airport: " + beach.airport.name
+    var liPort = document.createElement("li");
+    liPort.innerText = "Nearest Port: " + beach.port.name
+    var img = document.createElement('img');
+    img.src = "images/"+beach.img;
+    img.id= "images"
+    showData.appendChild(ul);
+    ul.appendChild(liTipology);
+    ul.appendChild(liParking);
+    ul.appendChild(liWiki);
+    ul.appendChild(liAirport);
+    ul.appendChild(liPort);
+    ul.appendChild(img);
+    
 
-      },
+  },
 
-      showDataEnd:function(beach){
-        var showData=document.querySelector('#data');
-        showData.innerHTML=""
-        var showWeather=document.querySelector('#beach-forecast');
-        showWeather.innerHTML=""
-      },
+  showDataEnd:function(beach){
+    var showData=document.querySelector('#data');
+    showData.innerHTML=""
+    var showWeather=document.querySelector('#beach-forecast');
+    showWeather.innerHTML=""
+  },
 
-      addBeachMarker: function(beach){
-        var infoWindow = new google.maps.InfoWindow({
+  reset:function(beach){
+    console.log("resetting")
+    this.googleMap.setZoom(8);
+    var center = {lat:40.111672, lng:9.015906}
+    this.googleMap.setCenter(center);
+    var clearButton = document.querySelector("#button-clear")
+    clearButton.style.visibility = 'hidden';
+    var airportButton = document.querySelector("#button-airport");
+    airportButton.style.visibility = 'hidden';
+    var portButton = document.querySelector("#button-port");
+    portButton.style.visibility = 'hidden';
+    var button = document.querySelector('#button');
+    button.style.visibility = 'hidden';
+    this.showDataEnd(beach)
+    this.clearMarkers(beach)
+  },
 
-          content: "<div class='beach-title'><p>Beach Name: <b>"+ beach.name +"</b></p></div>"
-        });
+  addBeachMarker: function(beach){
+    
+    var iconUmbrella = {
+      url: "http://www.iconeasy.com/icon/ico/Leisure/Beach%201/sun%20umbrella.ico",
+      scaledSize: new google.maps.Size(30, 30), 
+      origin: new google.maps.Point(0,0),
+      anchor: new google.maps.Point(30,30)
+    };
+    var marker = new google.maps.Marker({
+      position: {lat: parseFloat(beach.lat), lng: parseFloat(beach.lng)},
+      map: this.googleMap,
+      animation: google.maps.Animation.DROP,
+      icon: iconUmbrella,
+      name: beach.name,
+    });
 
-        var iconUmbrella = {
-          url: "http://www.iconeasy.com/icon/ico/Leisure/Beach%201/sun%20umbrella.ico",
-          scaledSize: new google.maps.Size(30, 30), 
-          origin: new google.maps.Point(0,0),
-          anchor: new google.maps.Point(30,30)
-        };
-        var marker = new google.maps.Marker({
-          position: {lat: parseFloat(beach.lat), lng: parseFloat(beach.lng)},
-          map: this.googleMap,
-          animation: google.maps.Animation.DROP,
-          icon: iconUmbrella,
-          name: beach.name,
-        });
+    marker.addListener('click', function (){
+      this.googleMap.setZoom(9);
+      this.googleMap.setCenter(marker.getPosition());
+      this.showData(beach)
 
-        marker.addListener('click', function (){
-          infoWindow.open(this.googleMap, marker);
-          this.googleMap.setZoom(9);
-          this.googleMap.setCenter(marker.getPosition());
+      var clearButton = document.querySelector("#button-clear")
+      clearButton.style.visibility = 'visible';
+      clearButton.onclick = function(){this.reset(beach)}.bind(this)
 
-          var detailsButton = document.querySelector("#button-details")
-          detailsButton.style.visibility = 'visible';
-          detailsButton.onclick = function(){this.showData(beach)}.bind(this)
 
-          var airportButton = document.querySelector("#button-airport");
-          airportButton.style.visibility = 'visible';
-          airportButton.onclick = function(){this.addPlaneMarker(beach)}.bind(this)
+      var airportButton = document.querySelector("#button-airport");
+      airportButton.style.visibility = 'visible';
+      airportButton.onclick = function(){this.addPlaneMarker(beach)}.bind(this)
 
-          var portButton = document.querySelector("#button-port");
-          portButton.style.visibility = 'visible';
-          portButton.onclick = function(){this.addBoatMarker(beach)}.bind(this)
-          localStorage.setItem('territory', beach.territory);
+      var portButton = document.querySelector("#button-port");
+      portButton.style.visibility = 'visible';
+      portButton.onclick = function(){this.addBoatMarker(beach)}.bind(this)
+      localStorage.setItem('territory', beach.territory);
 
-          var button = document.querySelector('#button');
-          button.style.visibility = 'visible';
+      var button = document.querySelector('#button');
+      button.style.visibility = 'visible';
 
-        }.bind(this));
+    }.bind(this));
 
-        google.maps.event.addListener(infoWindow, 'closeclick', function() {
-          this.googleMap.setZoom(8);
-          var center = {lat:40.111672, lng:9.015906}
-          this.googleMap.setCenter(center);
-          var detailsButton = document.querySelector("#button-details")
-          detailsButton.style.visibility = 'hidden';
-          var airportButton = document.querySelector("#button-airport");
-          airportButton.style.visibility = 'hidden';
-          var portButton = document.querySelector("#button-port");
-          portButton.style.visibility = 'hidden';
-          var button = document.querySelector('#button');
-          button.style.visibility = 'hidden';
-          this.showDataEnd(beach)
-          this.clearMarkers(beach)
-        }.bind(this))
+  },
 
-      },
+  centreMap: function (coords, zoom){
+    this.googleMap.setCenter(coords);
+    this.googleMap.setZoom(zoom);
+  }
+}
 
-      centreMap: function (coords, zoom){
-        this.googleMap.setCenter(coords);
-        this.googleMap.setZoom(zoom);
-      }
-    }
-
-    module.exports = MapWrapper
+module.exports = MapWrapper
