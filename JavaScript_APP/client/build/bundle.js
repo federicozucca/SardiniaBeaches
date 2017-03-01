@@ -232,107 +232,114 @@
 	  },
 	
 	  showData:function(beach){
-	    var showData =document.querySelector("#data");
-	    var ul = document.createElement("ul"); 
-	    var liName = document.createElement("li"); 
-	    liName.innerText = "Beach Name: " + beach.name
-	    var liTipology = document.createElement("li"); 
-	    liTipology.innerText = "Beach Tipology: " + beach.tipology
-	    var liParking = document.createElement("li");
-	    liParking.innerText = "Parking Area: " + beach.parking 
-	    var liWiki = document.createElement("li"); 
-	    liWiki.innerText = "Info: " + beach.wiki
-	    var liAirport = document.createElement("li");
-	    liAirport.innerText = "Nearest Airport: " + beach.airport.name
-	    var liPort = document.createElement("li");
-	    liPort.innerText = "Nearest Port: " + beach.port.name
-	    var img = document.createElement('img');
-	    img.src = "images/"+beach.img;
-	    showData.appendChild(ul);
-	    ul.appendChild(liName);
-	    ul.appendChild(liTipology);
-	    ul.appendChild(liParking);
-	    ul.appendChild(liWiki);
-	    ul.appendChild(liAirport);
-	    ul.appendChild(liPort);
-	    ul.appendChild(img);
-	  },
+	    var liName = document.querySelector("#liName")
 	
-	  showDataEnd:function(beach){
-	  var showData=document.querySelector('#data');
-	  showData.innerHTML=""
-	  var showWeather=document.querySelector('#beach-forecast');
-	  showWeather.innerHTML=""
-	  },
 	
-	  addBeachMarker: function(beach){
-	    var infoWindow = new google.maps.InfoWindow({
+	      var showData =document.querySelector("#data");
+	      var ul = document.createElement("ul"); 
+	      if (liName === null){
+	        var liName = document.createElement("li"); 
+	        liName.id = "liName"
+	        liName.innerText = "Beach Name: " + beach.name
+	        ul.appendChild(liName);
+	        var liTipology = document.createElement("li"); 
+	        liTipology.innerText = "Beach Tipology: " + beach.tipology
+	        var liParking = document.createElement("li");
+	        liParking.innerText = "Parking Area: " + beach.parking 
+	        var liWiki = document.createElement("li"); 
+	        liWiki.innerText = "Info: " + beach.wiki
+	        var liAirport = document.createElement("li");
+	        liAirport.innerText = "Nearest Airport: " + beach.airport.name
+	        var liPort = document.createElement("li");
+	        liPort.innerText = "Nearest Port: " + beach.port.name
+	        var img = document.createElement('img');
+	        img.src = "images/"+beach.img;
+	        img.id= "images"
+	        showData.appendChild(ul);
+	        ul.appendChild(liTipology);
+	        ul.appendChild(liParking);
+	        ul.appendChild(liWiki);
+	        ul.appendChild(liAirport);
+	        ul.appendChild(liPort);
+	        ul.appendChild(img);}
 	
-	      content: "<div class='beach-title'><p>Beach Name: <b>"+ beach.name +"</b></p></div>"
-	    });
+	      },
 	
-	    var iconUmbrella = {
-	      url: "http://www.iconeasy.com/icon/ico/Leisure/Beach%201/sun%20umbrella.ico",
-	      scaledSize: new google.maps.Size(30, 30), 
-	      origin: new google.maps.Point(0,0),
-	      anchor: new google.maps.Point(30,30)
-	    };
-	    var marker = new google.maps.Marker({
-	      position: {lat: parseFloat(beach.lat), lng: parseFloat(beach.lng)},
-	      map: this.googleMap,
-	      animation: google.maps.Animation.DROP,
-	      icon: iconUmbrella,
-	      name: beach.name,
-	    });
-	   
-	    marker.addListener('click', function (){
-	      infoWindow.open(this.googleMap, marker);
-	      this.googleMap.setZoom(9);
-	      this.googleMap.setCenter(marker.getPosition());
+	      showDataEnd:function(beach){
+	        var showData=document.querySelector('#data');
+	        showData.innerHTML=""
+	        var showWeather=document.querySelector('#beach-forecast');
+	        showWeather.innerHTML=""
+	      },
 	
-	      var detailsButton = document.querySelector("#button-details")
-	      detailsButton.style.visibility = 'visible';
-	      detailsButton.onclick = function(){this.showData(beach)}.bind(this)
+	      addBeachMarker: function(beach){
+	        var infoWindow = new google.maps.InfoWindow({
 	
-	      var airportButton = document.querySelector("#button-airport");
-	      airportButton.style.visibility = 'visible';
-	      airportButton.onclick = function(){this.addPlaneMarker(beach)}.bind(this)
-	      
-	      var portButton = document.querySelector("#button-port");
-	      portButton.style.visibility = 'visible';
-	      portButton.onclick = function(){this.addBoatMarker(beach)}.bind(this)
-	      localStorage.setItem('territory', beach.territory);
+	          content: "<div class='beach-title'><p>Beach Name: <b>"+ beach.name +"</b></p></div>"
+	        });
 	
-	      var button = document.querySelector('#button');
-	      button.style.visibility = 'visible';
+	        var iconUmbrella = {
+	          url: "http://www.iconeasy.com/icon/ico/Leisure/Beach%201/sun%20umbrella.ico",
+	          scaledSize: new google.maps.Size(30, 30), 
+	          origin: new google.maps.Point(0,0),
+	          anchor: new google.maps.Point(30,30)
+	        };
+	        var marker = new google.maps.Marker({
+	          position: {lat: parseFloat(beach.lat), lng: parseFloat(beach.lng)},
+	          map: this.googleMap,
+	          animation: google.maps.Animation.DROP,
+	          icon: iconUmbrella,
+	          name: beach.name,
+	        });
 	
-	    }.bind(this));
-	   
-	    google.maps.event.addListener(infoWindow, 'closeclick', function() {
-	      this.googleMap.setZoom(8);
-	      var center = {lat:40.111672, lng:9.015906}
-	      this.googleMap.setCenter(center);
-	      var detailsButton = document.querySelector("#button-details")
-	      detailsButton.style.visibility = 'hidden';
-	      var airportButton = document.querySelector("#button-airport");
-	      airportButton.style.visibility = 'hidden';
-	      var portButton = document.querySelector("#button-port");
-	      portButton.style.visibility = 'hidden';
-	      var button = document.querySelector('#button');
-	      button.style.visibility = 'hidden';
-	      this.showDataEnd(beach)
-	      this.clearMarkers(beach)
-	    }.bind(this))
+	        marker.addListener('click', function (){
+	          infoWindow.open(this.googleMap, marker);
+	          this.googleMap.setZoom(9);
+	          this.googleMap.setCenter(marker.getPosition());
 	
-	  },
+	          var detailsButton = document.querySelector("#button-details")
+	          detailsButton.style.visibility = 'visible';
+	          detailsButton.onclick = function(){this.showData(beach)}.bind(this)
 	
-	  centreMap: function (coords, zoom){
-	    this.googleMap.setCenter(coords);
-	    this.googleMap.setZoom(zoom);
-	  }
-	}
+	          var airportButton = document.querySelector("#button-airport");
+	          airportButton.style.visibility = 'visible';
+	          airportButton.onclick = function(){this.addPlaneMarker(beach)}.bind(this)
 	
-	module.exports = MapWrapper
+	          var portButton = document.querySelector("#button-port");
+	          portButton.style.visibility = 'visible';
+	          portButton.onclick = function(){this.addBoatMarker(beach)}.bind(this)
+	          localStorage.setItem('territory', beach.territory);
+	
+	          var button = document.querySelector('#button');
+	          button.style.visibility = 'visible';
+	
+	        }.bind(this));
+	
+	        google.maps.event.addListener(infoWindow, 'closeclick', function() {
+	          this.googleMap.setZoom(8);
+	          var center = {lat:40.111672, lng:9.015906}
+	          this.googleMap.setCenter(center);
+	          var detailsButton = document.querySelector("#button-details")
+	          detailsButton.style.visibility = 'hidden';
+	          var airportButton = document.querySelector("#button-airport");
+	          airportButton.style.visibility = 'hidden';
+	          var portButton = document.querySelector("#button-port");
+	          portButton.style.visibility = 'hidden';
+	          var button = document.querySelector('#button');
+	          button.style.visibility = 'hidden';
+	          this.showDataEnd(beach)
+	          this.clearMarkers(beach)
+	        }.bind(this))
+	
+	      },
+	
+	      centreMap: function (coords, zoom){
+	        this.googleMap.setCenter(coords);
+	        this.googleMap.setZoom(zoom);
+	      }
+	    }
+	
+	    module.exports = MapWrapper
 
 /***/ },
 /* 6 */
@@ -365,12 +372,14 @@
 	},
 	
 	displayWeather:function(data){
+	  var liDescription = document.querySelector("#weather-descr")
+	
 	  var beachForecast = document.querySelector('#beach-forecast');
-	  console.log(data.city.name)
-	  console.log(data)
-	  console.log(data.list[0].weather[0].description)
 	  var ul = document.createElement('ul');
+	
+	  if(liDescription === null){
 	  var liDescription = document.createElement('li');
+	  liDescription.id="weather-descr";
 	  liDescription.innerText = data.list[0].weather[0].description;
 	  
 	  var imgWeather = document.createElement('img')
@@ -406,6 +415,7 @@
 	  ul.appendChild(liTemp);
 	  ul.appendChild(liWind);
 	  }
+	}
 	
 	}
 	

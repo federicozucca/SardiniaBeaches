@@ -144,3 +144,8 @@ body {
   background-image: linear-gradient(to bottom, #ffe014, #d51011);
   text-decoration: none;
 }
+
+#images {
+  width: 300px;
+  height: 200px;
+}

@@ -25,12 +25,14 @@ makeRequest: function(url, callback){
 },
 
 displayWeather:function(data){
+  var liDescription = document.querySelector("#weather-descr")
+
   var beachForecast = document.querySelector('#beach-forecast');
-  console.log(data.city.name)
-  console.log(data)
-  console.log(data.list[0].weather[0].description)
   var ul = document.createElement('ul');
+
+  if(liDescription === null){
   var liDescription = document.createElement('li');
+  liDescription.id="weather-descr";
   liDescription.innerText = data.list[0].weather[0].description;
   
   var imgWeather = document.createElement('img')
@@ -66,6 +68,7 @@ displayWeather:function(data){
   ul.appendChild(liTemp);
   ul.appendChild(liWind);
   }
+}
 
 }
 
