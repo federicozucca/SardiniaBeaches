@@ -4,12 +4,25 @@ body {
   border-width: 5px;
 }
 
-#header{
+#title{    font-family: 'Kranky', cursive;
+font-size: 30px
+}
+
+#logo{
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: center;
+
+}
+
+
+#header{
+  height: 105px;
+  display: flex;
+  justify-content: center;
   background-color: #a3ccff;
+  background-repeat: repeat;
   border-style: solid;
+  color: black;
   border-width: 0px 0px 4px 0px
 
 }
@@ -18,8 +31,8 @@ body {
   font-family: 'Kranky', cursive;
   display: flex;
   align-items: right;
+  color: black;
   justify-content: space-around;
-  background-color: #a3ccff;
 }
 
 .container {
