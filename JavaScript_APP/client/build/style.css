@@ -1,4 +1,22 @@
 body {
+  font-family: 'Sniglet', cursive;
+  border-style: solid;
+  border-width: 5px;
+}
+
+#header{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  background-color: #a3ccff;
+}
+
+#links {
+  font-family: 'Kranky', cursive;
+  display: flex;
+  align-items: right;
+  justify-content: space-around;
+  background-color: #a3ccff;
 }
 
 .container {
@@ -32,6 +50,8 @@ body {
   justify-content: center;
   height: 600px;
   width: 40%;
+  background-color: #a3ccff;
+
 }
 
 #action {
@@ -41,6 +61,7 @@ body {
   justify-content: center;
   height: 600px;
   width: 20%;
+  background-color: #a3ccff;
 }
 
 
@@ -51,6 +72,9 @@ body {
   justify-content: center;
   height: 600px;
   width: 40%;
+  background-color: white;
+  border-style: solid;
+  border-width: 4px 0px 0px 4px
 }
 
 #button {

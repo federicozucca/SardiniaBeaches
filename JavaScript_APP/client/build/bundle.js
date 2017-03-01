@@ -376,6 +376,7 @@
 	
 	  var beachForecast = document.querySelector('#beach-forecast');
 	  var ul = document.createElement('ul');
+	  console.log("weather location: ",data.city.name)
 	
 	  if(liDescription === null){
 	  var liDescription = document.createElement('li');
